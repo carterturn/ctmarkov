@@ -33,7 +33,6 @@ class markovnode {
 
 public:
 	markovnode(std::string name);
-	~markovnode();
 	
 	int appendnode(markovnode *node);
 	

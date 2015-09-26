@@ -1,20 +1,20 @@
 /*
   Copyright 2015 Carter Turnbaugh
 
-  This file is part of Terca C++ Vector.
+  This file is part of Terca C++ Markov.
 
-  Terca C++ Vector is free software: you can redistribute it and/or modify
+  Terca C++ Markov is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  Terca C++ Vector is distributed in the hope that it will be useful,
+  Terca C++ Markov is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with Terca C++ Vector.  If not, see <http://www.gnu.org/licenses/>.
+  along with Terca C++ Markov.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <iostream>
@@ -43,7 +43,7 @@ int main(int argc, char* argv[]){
 	chain.addlink("d", "d");
 	chain.addlink("d", "d");
 	chain.addlink("d", "a");
-	vector<string> result = chain.walk("a", 5000);
+	vector<string> result = chain.walk("a", 5);
 	
 	for(int i = 0; i < result.size(); i++){
 		cout << result[i] << " ";

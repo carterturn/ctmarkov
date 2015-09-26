@@ -1,20 +1,20 @@
 /*
   Copyright 2015 Carter Turnbaugh
 
-  This file is part of Terca C++ Vector.
+  This file is part of Terca C++ Markov.
 
-  Terca C++ Vector is free software: you can redistribute it and/or modify
+  Terca C++ Markov is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
 
-  Terca C++ Vector is distributed in the hope that it will be useful,
+  Terca C++ Markov is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License
-  along with Terca C++ Vector.  If not, see <http://www.gnu.org/licenses/>.
+  along with Terca C++ Markov.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <cstdlib>
@@ -27,7 +27,6 @@ markovnode::markovnode(string name){
 	id = name;
 	srand(time(NULL));
 }
-markovnode::~markovnode(){}
 
 //Returns 1 if node probabilty increased, 2 if node added
 int markovnode::appendnode(markovnode *node){
@@ -50,19 +49,24 @@ int markovnode::appendnode(markovnode *node){
 }
 
 markovnode *markovnode::getnext(){
-	vector<int> nodes;
-	
+	int totalprob = 0;
+
 	for(int i = 0; i < nextnodes.size(); i++){
-		for(int j = 0; j < nextnodes[i].prob; j++){
-			nodes.push_back(i);
+		totalprob += nextnodes[i].prob;
+	}
+	cout << totalprob << "\n";
+	if(nextnodes.size() > 0 && totalprob > 0){
+		totalprob -= rand()%totalprob;
+		
+	cout << totalprob << "\n";
+		for(int i = 0; i < nextnodes.size(); i++){
+			totalprob -= nextnodes[i].prob;
+	cout << totalprob << "\n";
+			if(totalprob <= 0) return nextnodes[i].node;
 		}
 	}
-		
-	if(nodes.size() > 0 && nextnodes.size() > 0) return nextnodes[nodes[rand()%nodes.size()]].node;
-	else{
-		cout << "No nodes or no next nodes\n";
-		return this;
-	}
+	cout << "No next nodes\n";
+	return this;
 }
 
 markovnode *markovnode::getbest(){
