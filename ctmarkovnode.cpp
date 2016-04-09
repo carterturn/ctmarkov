@@ -54,18 +54,15 @@ markovnode *markovnode::getnext(){
 	for(int i = 0; i < nextnodes.size(); i++){
 		totalprob += nextnodes[i].prob;
 	}
-	cout << totalprob << "\n";
+
 	if(nextnodes.size() > 0 && totalprob > 0){
 		totalprob -= rand()%totalprob;
 		
-	cout << totalprob << "\n";
 		for(int i = 0; i < nextnodes.size(); i++){
 			totalprob -= nextnodes[i].prob;
-	cout << totalprob << "\n";
 			if(totalprob <= 0) return nextnodes[i].node;
 		}
 	}
-	cout << "No next nodes\n";
 	return this;
 }
 
