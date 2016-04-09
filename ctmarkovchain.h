@@ -37,3 +37,19 @@ private:
 	
 	int getindex(std::string nodename);
 };
+
+class dualmarkovchain {
+public:
+	int addnode(std::string node);
+	int addforwardlink(std::string node, std::string nextnode);
+	int addreverselink(std::string node, std::string nextnode);
+	
+	std::vector<std::string> walkforward(std::string start, int steps);
+	std::vector<std::string> walkforwarduntil(std::string start, std::string end);
+	std::vector<std::string> walkreverse(std::string start, int steps);
+	std::vector<std::string> walkreverseuntil(std::string start, std::string end);
+	
+private:
+	markovchain forward;
+	markovchain reverse;
+};
