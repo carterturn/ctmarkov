@@ -31,7 +31,6 @@ int main(int argc, char* argv[]){
 	chain.addnode("c");
 	chain.addnode("d");
 	
-	chain.addlink("a", "a");
 	chain.addlink("a", "b");
 	chain.addlink("a", "c");
 	chain.addlink("b", "b");
@@ -48,8 +47,48 @@ int main(int argc, char* argv[]){
 	for(int i = 0; i < result.size(); i++){
 		cout << result[i] << " ";
 	}
+
+	cout << "\n";
+	dualmarkovchain dualchain;
+
+	dualchain.addnode("a");
+	dualchain.addnode("b");
+	dualchain.addnode("c");
+	dualchain.addnode("d");
+
+	dualchain.addforwardlink("a", "b");
+	dualchain.addforwardlink("a", "b");
+	dualchain.addforwardlink("a", "b");
+	dualchain.addforwardlink("a", "b");
+	dualchain.addforwardlink("a", "b");
+	dualchain.addforwardlink("a", "b");
+	dualchain.addforwardlink("a", "b");
+	dualchain.addforwardlink("a", "c");
+	dualchain.addforwardlink("b", "c");
+	dualchain.addforwardlink("b", "c");
+	dualchain.addforwardlink("c", "c");
 	
-	chain.test();
+	dualchain.addreverselink("c", "a");
+	dualchain.addreverselink("c", "a");
+	dualchain.addreverselink("c", "b");
+	dualchain.addreverselink("c", "b");
+	dualchain.addreverselink("b", "a");
+	dualchain.addreverselink("a", "c");
+
+	vector<string> forwardresult = dualchain.walkforward("a", 4);
+	vector<string> reverseresult = dualchain.walkreverse("a", 4);
+	
+	result = reverseresult;
+	for(int i = 0; i < result.size(); i++){
+		cout << result[i] << " ";
+	}
+	cout << "a ";
+
+	result = forwardresult;
+	for(int i = 0; i < result.size(); i++){
+		cout << result[i] << " ";
+	}
+	cout << "\n";
 	
 	return 0;
 }
