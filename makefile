@@ -8,14 +8,17 @@ build: $(NODE) $(CHAIN)
 	$(CPP) -c -fPIC $(CHAIN)
 	$(CPP) -shared -Wl,-soname,libctmarkovchain.so -o libctmarkovchain.so *.o
 install:
-	cp libctmarkovchain.so /usr/lib/
-	cp ctmarkovchain.h /usr/include/
-	cp ctmarkovnode.h /usr/include/
+	cp -f libctmarkovchain.so /usr/lib/
+	cp -f ctmarkovchain.h /usr/include/
+	cp -f ctmarkovnode.h /usr/include/
 uninstall:
-	rm /usr/lib/libctmarkovchain.so
-	rm /usr/include/ctmarkovchain.h
-	rm /usr/include/ctmarkovnode.h
+	rm -f /usr/lib/libctmarkovchain.so
+	rm -f /usr/include/ctmarkovchain.h
+	rm -f /usr/include/ctmarkovnode.h
 test: test.cpp $(CHAIN) $(NODE)
 	g++ -o test test.cpp $(CHAIN) $(NODE)
 clean:
-	rm *.o *.so *.gch test
+	for file in $$(ls *.o); do rm $$file; done
+	for file in $$(ls *.so); do rm $$file; done
+	for file in $$(ls *.gch); do rm $$file; done
+	if [ -e test ]; then rm test; fi
